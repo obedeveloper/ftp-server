@@ -1,5 +1,13 @@
 {
   "tasks": {
-    "dev": "deno run --watch main.ts"
+    "dev": "deno run --watch main.tsx",
+    "start": "deno run main.tsx"
+  },
+  "imports": {
+    "@hono/hono": "jsr:@hono/hono@^4.12.3"
+  },
+  "compilerOptions": {
+    "jsx": "precompile",
+    "jsxImportSource": "@hono/hono/jsx"
   }
 }
