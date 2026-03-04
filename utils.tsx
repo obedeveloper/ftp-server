@@ -28,6 +28,7 @@ export const Page: FC<Props> = ({ filesAndDirs, base }) => {
             content="width=device-width, initial-scale=1.0"
           />
           <title>FTP - Server</title>
+          <link rel="stylesheet" href="/styles.css" />
         </head>
         <body>
           <a href="/">Home</a>
@@ -37,11 +38,19 @@ export const Page: FC<Props> = ({ filesAndDirs, base }) => {
               return (
                 <li key={name}>
                   {isFile && (
-                    <a download={name} href={`/file${hrefBase}/${name}`}>
-                      📄 {name}
+                    <a
+                      class="file"
+                      download={name}
+                      href={`/file${hrefBase}/${name}`}
+                    >
+                      {name}
                     </a>
                   )}
-                  {isDirectory && <a href={`${hrefBase}/${name}`}>📁 {name}</a>}
+                  {isDirectory && (
+                    <a class="dir" href={`${hrefBase}/${name}`}>
+                      {name}
+                    </a>
+                  )}
                 </li>
               );
             })}
