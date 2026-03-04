@@ -4,11 +4,6 @@ import { Page } from './utils.tsx';
 
 const app = new Hono();
 
-app.get('/styles.css', async (c) => {
-  const css = await Deno.readFile('./styles.css');
-  return c.body(css, 200, { 'content-type': 'text/css' });
-});
-
 app.get('/file/*', async (c) => {
   const relative = c.req.path.replace(/^\/file/, '');
   const file = await Deno.open('.' + relative);

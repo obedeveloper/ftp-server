@@ -1,4 +1,5 @@
 import { FC } from '@hono/hono/jsx';
+import { css, Style } from '@hono/hono/css';
 
 export async function listFilesAndDir(path?: string | null) {
   const entries: Deno.DirEntry[] = [];
@@ -15,6 +16,67 @@ interface Props {
   base: string;
 }
 
+const globalCSS = css`
+  body {
+    margin: 0;
+    padding: 1rem;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+  }
+
+  a {
+    color: #0366d6;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  h2 {
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  li {
+    margin: 0.25rem 0;
+  }
+
+  li a {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  li a:hover {
+    background-color: #e1e4e8;
+  }
+
+  li a.file::before {
+    content: '📄';
+    margin-right: 0.5rem;
+  }
+
+  li a.dir::before {
+    content: '📁';
+    margin-right: 0.5rem;
+  }
+`;
+
 export const Page: FC<Props> = ({ filesAndDirs, base }) => {
   const hrefBase = base === '/' ? '' : base;
 
@@ -28,7 +90,7 @@ export const Page: FC<Props> = ({ filesAndDirs, base }) => {
             content="width=device-width, initial-scale=1.0"
           />
           <title>FTP - Server</title>
-          <link rel="stylesheet" href="/styles.css" />
+          <Style>{globalCSS}</Style>
         </head>
         <body>
           <a href="/">Home</a>
